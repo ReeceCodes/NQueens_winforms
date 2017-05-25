@@ -24,6 +24,8 @@ namespace NQueens_winforms
             _logic = new logic();
             _timer = new Timer();
 
+            _logic.Queens = (int)nmbQueens.Value;
+
             _timer.Enabled = false;
             _timer.Interval = 1;
 
@@ -32,14 +34,13 @@ namespace NQueens_winforms
             btnStart.Click += new EventHandler(btnStart_Click);
             btnStop.Click += new EventHandler(btnStop_Click);
             btnReset.Click += new EventHandler(btnReset_Click);
+            board1.MouseDown += new MouseEventHandler(board1_MouseDown);
         }
 
         private void UpdateDisplay()
         {
             lbliteration.Text = Iteration.ToString();
-
-            //put code for updating display here, class will have the updated values
-            
+            board1.UpdateBoard(_logic.CurrentStates);
         }
 
         private void _timer_Tick(object sender, EventArgs e)
@@ -53,6 +54,7 @@ namespace NQueens_winforms
         private void nmbQueens_ValueChanged(object sender, EventArgs e)
         {
             board1.Queens = (int)nmbQueens.Value;
+            _logic.Queens = (int)nmbQueens.Value;
             UpdateDisplay();
         }
 
@@ -72,6 +74,17 @@ namespace NQueens_winforms
             _timer.Stop();
             _logic.ClearBoard();
             Iteration = 0;
+            UpdateDisplay();
+        }
+
+        private void board1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int y = (int)(((float)e.Y) / (board1.Height / (float)nmbQueens.Value));
+            int x = (int)(((float)e.X) / (board1.Width / (float)nmbQueens.Value));
+
+            _logic.ClearBoard();
+            _logic.SetSquare(x, y);
+
             UpdateDisplay();
         }
 

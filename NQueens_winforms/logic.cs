@@ -35,6 +35,12 @@ namespace NQueens_winforms
             _currentStates = new int[Queens*Queens];
         }
 
+        public void SetSquare(int x, int y)
+        {
+            CurrentStates[x + (y * Queens)] = 2;
+            PlacedQueens = 1;
+        }
+
         
 
 

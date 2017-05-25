@@ -88,6 +88,6 @@ namespace NQueens_winforms
                 }
             }
         }
-
+        
     }
 }
