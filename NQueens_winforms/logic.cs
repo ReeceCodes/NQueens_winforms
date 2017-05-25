@@ -8,7 +8,11 @@ namespace NQueens_winforms
 {
     class logic
     {
-        public int Queens { get; set; }
+        public int Queens
+        { 
+            get { return _queens; }
+            set { _queens = value; ClearBoard(); }
+        }
 
         public int PlacedQueens { get; set; }
 
@@ -19,6 +23,7 @@ namespace NQueens_winforms
         }
 
         private int[] _currentStates;
+        private int _queens;
 
         public int IsAllowed(int x, int y)
         {
